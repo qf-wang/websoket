@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="sendText">
+  <button id="btn">click  send!!</button>
+    <script>
+      var scoket = new WebSocket('ws://localhost:3000');
+      scoket.onopen =  function() {
+        console.log('open');
+      }
+      scoket.onclose = function() {
+        console.log('close');
+      }
+      scoket.onmessage = function(e) {
+        var div = document.createElement('p');
+        div.innerHTML = e.data;
+        document.body.appendChild(div);
+      }
+      btn.onclick = function() {
+        scoket.send(sendText.value)
+      }
+    
+    </script>
+</body>
+</html>
